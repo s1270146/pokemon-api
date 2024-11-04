@@ -2,14 +2,14 @@ require 'sinatra'
 require 'sinatra/namespace'
 require 'json'
 
+require_relative '../../../config/database'
+
 class TypeRoutes < Sinatra::Base
   register Sinatra::Namespace
   namespace '/api/v1' do
     get '/type' do
-      types = [
-        {id:1, name: 'test1'},
-        {id:2, name: 'test2'}
-      ]
+      content_type :json
+      types = DB[:types].all
       types.to_json
     end
   end

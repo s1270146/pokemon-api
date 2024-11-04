@@ -12,4 +12,9 @@ class App < Sinatra::Base
     use PokemonRoutes
     use PropertyRoutes
     use TypeRoutes
+
+    not_found do  
+      content_type :json
+      { error: 'Not Found' }.to_json
+    end
 end
